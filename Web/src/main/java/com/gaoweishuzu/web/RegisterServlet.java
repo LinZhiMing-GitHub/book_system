@@ -20,14 +20,12 @@ import java.io.IOException;
  * 负责前后端数据传递
  */
 
-@WebServlet("/registerServlet")
-//@Controller
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-//    // 创建Spring配置类对象
-//    ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-//    // 获取RegisterService的bean
-//    RegisterService registerService = ctx.getBean(RegisterService.class);
-    RegisterService registerService = new RegisterServiceImpl();
+    // 创建Spring配置类对象
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+    // 获取RegisterService的bean
+    RegisterService registerService = ctx.getBean(RegisterService.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,46 +40,31 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
 
-        // 用于debug
+        // 查看前端传来的数据
         System.out.println("RS-username:"+user.getUsername());
         System.out.println("RS-email:"+user.getEmail());
         System.out.println("RS-password:"+user.getPassword());
 
         // 通过邮箱查找是否重名
-        boolean flag = register(user);
-        System.out.println("RS-flag:"+flag);
+        User user1 = registerService.findByEmail(email);
+        System.out.println("RS-user1:"+user1);
 
         // 判断是否注册成功
-        if (flag){
-            // 当flag是True，代表没有记录，即不重名，注册成功
-            System.out.println("RS:注册成功");
+        if (user1 == null){
+            // 当user1 == null，代表没有记录，即不重名，注册成功
             // 插入记录
             registerService.insert(user);
             // 跳转到主页面
-            System.out.println("RS:插入完了");
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         } else {
             // 注册失败，跳转到注册页面并且返回错误信息
-//            req.setAttribute("register_msg", "用户名已存在");
-            req.getRequestDispatcher("register.jsp").forward(req, resp);
+            req.setAttribute("register_msg", "注册失败，账户已存在");
+            req.getRequestDispatcher("Register.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
-    }
-
-    // 注册
-    public boolean register(User user) {
-        boolean flag = false;
-
-        User user1 = registerService.findByEmail(user.getEmail());
-        if (user1 == null) {
-            registerService.insert(user);
-            flag = true;
-        }
-
-        return flag;
     }
 }

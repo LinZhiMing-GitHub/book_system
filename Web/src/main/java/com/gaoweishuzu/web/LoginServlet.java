@@ -21,8 +21,6 @@ import java.io.IOException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-//    LoginService loginService = new LoginServiceImpl();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 创建Spring配置类对象
@@ -33,12 +31,13 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email1");
         String password = req.getParameter("password1");
 
+        // 查看前端传来的数据
         System.out.println("LS-email:" + email);
         System.out.println("LS-password:" + password);
 
         // 通过邮箱查找密码
         User user = loginService.findByEmail(email);
-        System.out.println("LS-user1:" + user);
+        System.out.println("LS-user:" + user);
 
         // 判断是否登录成功
         if (user != null && user.getPassword().equals(password)) {
@@ -46,9 +45,9 @@ public class LoginServlet extends HttpServlet {
             // 跳转到主页面
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         } else {
-            // 登录失败，跳转到注册页面并且返回错误信息
-//            req.setAttribute("Login_msg", "用户名已存在");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            // 登录失败，跳转到登录注册页面并且返回错误信息
+            req.setAttribute("login_msg", "邮箱或密码错误");
+            req.getRequestDispatcher("Login.jsp").forward(req, resp);
         }
     }
 

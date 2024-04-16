@@ -347,7 +347,7 @@
                                                 <div class="menumaina-title">支持</div>
                                                 <a href="javascript:;" class="menumaina-text">帮助和社区</a>
                                                 <a href="javascript:;" class="menumaina-text">有一个具体的问题吗？</a>
-                                                <a href="Login.jsp" class="hearight-item-text">联系我们</a>
+                                                <a href="Login.html" class="hearight-item-text">联系我们</a>
                                                 <a href="javascript:;" class="menumaina-text">引用我们的资源？</a>
                                             </div>
                                         </div>
@@ -377,7 +377,7 @@
                         <div class="hearight-item-box opctchange1">
                             <a href="javascript:;" class="hearight-item-text">帮助和社区</a>
                             <a href="javascript:;" class="hearight-item-text">有一个具体的问题吗？</a>
-                            <a href="Login.jsp" class="hearight-item-text">联系我们</a>
+                            <a href="Login.html" class="hearight-item-text">联系我们</a>
                             <a href="javascript:;" class="hearight-item-text">引用我们的资源？</a>
                         </div>
                     </div>

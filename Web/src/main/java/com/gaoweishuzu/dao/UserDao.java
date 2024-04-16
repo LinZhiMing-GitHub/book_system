@@ -15,6 +15,6 @@ public interface UserDao {
 
     // 通过email查找记录
 //    @Select("select * from tb_user where email = #{email}")
-    @Select("select * from web.tb_user")
+    @Select("select * from web.tb_user where email = #{email}")
     User findByEmail(String email);
 }

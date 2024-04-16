@@ -22,7 +22,8 @@
     <div class="container__form container--signup">
         <!--action:url地址; method:请求方法-->
         <form action="RegisterServlet" method="post" class="form" id="form1">
-            <h2 class="form__title">注册页面</h2>
+            <h2 class="form__title">注册</h2>
+            <div id="errorMsg">${register_msg}</div>
             <input type="text" placeholder="用户" class="input" name="username"/>
             <input type="email" placeholder="邮箱" class="input" name="email"/>
             <input type="password" placeholder="密码" class="input" name="password"/>
@@ -36,7 +37,6 @@
     <div class="container__form container--signin">
         <form action="LoginServlet" class="form" id="form2" method="post">
             <h2 class="form__title">登录</h2>
-            <div id="errorMsg">${login_msg}</div>
             <input type="email" placeholder="邮箱" class="input" name="email1"/>
             <input type="password" placeholder="密码" class="input" name="password1"/>
             <a href="#" class="link">忘记你的密码?</a>

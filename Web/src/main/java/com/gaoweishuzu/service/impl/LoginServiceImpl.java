@@ -18,9 +18,9 @@ public class LoginServiceImpl implements LoginService {
     private UserDao userDao;
 
     public User findByEmail(String email) {
-        System.out.println("LSI:"+email);
+//        System.out.println("LSI:"+email);
         User user = userDao.findByEmail(email);
-        System.out.println("LSI:"+user);
+//        System.out.println("LSI:"+user);
         return user;
     }
 }
