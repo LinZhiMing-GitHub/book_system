@@ -12,3 +12,6 @@ create table tb_user(
     email varchar(20),
     password varchar(50)
 );
+
+# 测试数据
+insert into tb_user values (1, 'lzm', '111@163.com', '123456'), (2, 'cxh', '222@163.com', '234567');

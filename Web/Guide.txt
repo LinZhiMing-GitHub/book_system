@@ -1,0 +1,4 @@
+程序使用指南：
+1. 将 /src/main/resources/jdbc.properties 下的username和password,改成本机MySQL的配置
+2. 将 /src/main/database/tb_user.txt 下的SQL语句执行
+3. 自行配置好tomcat执行
