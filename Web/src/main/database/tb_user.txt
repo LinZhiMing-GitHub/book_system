@@ -1,0 +1,14 @@
+# 创建web数据库
+create database if not exists web;
+
+# 使用web数据库
+use web;
+
+# 创建用户基本信息表tb_user
+drop table if exists tb_user;
+create table tb_user(
+    id int primary key auto_increment,
+    username varchar(20),
+    email varchar(20),
+    password varchar(50)
+);
