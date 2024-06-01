@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+
+<body>
+<div id="app">
+    <!--  通过验证码登录+注册  -->
+    <input type="text" name="phone" placeholder="请输入手机号" v-model="form1.phone">
+    <input type="text" name="code" placeholder="请输入验证码" v-model="form1.code">
+    <button type="submit" @click="sendCode">获取验证码</button>
+    <button type="submit" @click="codeLogin">登录</button>
+    <br>
+
+    <!--  通过手机号和密码登录  -->
+    <input type="text" name="phone" placeholder="请输入手机号" v-model="form.phone">
+    <input type="password" name="password" placeholder="请输入密码" v-model="form.password">
+    <button type="submit" @click="login">登录</button>
+
+</div>
+
+<!--引入库-->
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            // 密码登录表单
+            form: {
+                phone: '',
+                password: ''
+            },
+            // 验证码登录表单
+            form1: {
+                phone: '',
+                code: ''
+            }
+        },
+        methods: {
+            // 密码登录
+            login() {
+                // TODO 当用户名或密码为空的时候，给出提示信息
+                // 向后端传输数据
+                axios.post("users/login", this.form)
+                    .then(response => {
+
+                        window.location.href = 'http://localhost/index.html';
+                    })
+            },
+
+            // 发送验证码
+            sendCode() {
+                axios.post("users/code", this.form1)
+                    .then(response => {
+                        alert(response.data.data);
+                    })
+            },
+
+            // 验证码登录
+            codeLogin() {
+                axios.post("users/codeLogin", this.form1)
+                    .then(response => {
+
+                        window.location.href = 'http://localhost/index.html';
+                    })
+            }
+        }
+    });
+</script>
+</body>
+
+</html>
