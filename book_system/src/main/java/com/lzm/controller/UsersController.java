@@ -26,7 +26,6 @@ public class UsersController {
     // 发送手机验证码
     @PostMapping("/code")
     public Result sendCode(@RequestBody LoginFormDTO loginFormDTO, HttpSession session) {
-        System.out.println("1:"+loginFormDTO);
         // 发送短信验证码并保存验证码
         return usersService.sendCode(loginFormDTO, session);
     }

@@ -1,19 +1,15 @@
 package com.lzm.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lzm.domain.Users;
 import com.lzm.dao.UsersDao;
 import com.lzm.dto.LoginFormDTO;
 import com.lzm.dto.Result;
-import com.lzm.dto.UserDTO;
 import com.lzm.service.IUsersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lzm.utils.RegexPatterns;
 import com.lzm.utils.RegexUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +60,6 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements IU
         stringRedisTemplate.opsForValue()
                 .set(LOGIN_CODE_KEY + loginFormDTO.getPhone(), code, LOGIN_CODE_TTL, TimeUnit.MINUTES);
         // 将验证码传回前端
-        System.out.println("2:"+code);
         return Result.ok(code);
     }
 

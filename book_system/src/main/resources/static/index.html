@@ -5,31 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>主页</title>
-
+    <style>
+        .book-li {
+            list-style-type: none;
+        }
+    </style>
 </head>
 
 <body>
-<table border="2px">
-    <tr>
-        <td>书名</td>
-        <td>价格</td>
-        <td>剩余量</td>
-        <td>描述</td>
-        <td>类别</td>
-    </tr>
+<div>
+    <h1 align="middle">可购书籍</h1>
+    <div id="book-list">
+        <div v-for="book in books" class="book-li">
+            <div style="display: inline-block">{{ book.title }}</div>
+            <div style="display: inline-block">{{ book.price+"元"}}</div>
+            <div style="display: inline-block">{{ "存货："+book.stock }}</div>
+            <div style="display: inline-block">{{ book.description }}</div>
+            <div style="display: inline-block">{{ "类型："+book.category}}</div>
+            <br>
+        </div>
+    </div>
+</div>
 
-</table>
-
-<script src="./js/vue.js"></script>
-<script src="./js/axios.min.js"></script>
-<!--引入组件库-->
-<script src="./js/element.js"></script>
-<script src="./js/common.js"></script>
-<script src="./js/footer.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
 <!--引入form-serialize插件-->
 <script src="./lib/form-serialize.js"></script>
-<script>
 
+<script>
+    const app = new Vue({
+        el: "#book-list",
+        mounted() {
+            var _this = this;
+            // 查询所有书籍数据到页面
+            axios.get("books/getAllBooks")
+                .then(response => {
+                    _this.books = response.data;
+                })
+        },
+        data() {
+            return {
+                //品牌模型数据
+                // books: {
+                //     title: "",
+                //     price: "",
+                //     stock: "",
+                //     description: "",
+                //     category: ""
+                // }
+                books: []
+            }
+        },
+        methods: {}
+    })
 </script>
 </body>
 
